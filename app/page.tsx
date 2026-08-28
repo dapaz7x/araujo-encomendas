@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import { deleteOrder, loadOrders, persistOrder, updateOrderStatus, type Item, type OrderStatus, type SavedOrder } from '@/lib/orders';
+import { buildEscPosOrder } from '@/lib/printer';
 const emptyItem = (id:number):Item => ({ id, quantity:'1', description:'' });
 
 export default function Home() {
@@ -34,7 +35,24 @@ export default function Home() {
   }
   function changeStatus(id:string,status:OrderStatus) { updateOrderStatus(id,status); setOrders(current=>current.map(order=>order.id===id?{...order,status}:order)); }
   function removeSavedOrder(order:SavedOrder) { if(!confirm(`Excluir definitivamente a encomenda de ${order.customer}?\n\nUse esta opção somente quando o cliente desistir ou o pedido tiver sido criado por engano.`))return;deleteOrder(order.id);setOrders(current=>current.filter(item=>item.id!==order.id)); }
-  function printOrder() { const form = document.querySelector('form'); if (!form?.reportValidity()) return; setPrintTest(false); setNow(new Date().toLocaleString('pt-BR')); setTimeout(() => window.print(),50); }
+  async function printOrder() {
+    const form = document.querySelector('form');
+    if (!form?.reportValidity()) return;
+    setPrintTest(false);
+    setNow(new Date().toLocaleString('pt-BR'));
+    if (!window.electronAPI?.printReceipt) {
+      setTimeout(() => window.print(), 50);
+      return;
+    }
+    try {
+      const rawData = buildEscPosOrder(new FormData(form), items, orderType);
+      await window.electronAPI.printReceipt({ printerName: 'ELGIN i8', rawData });
+      setFeedback('Encomenda enviada diretamente para a ELGIN i8.');
+      setTimeout(() => setFeedback(''), 3000);
+    } catch (error) {
+      alert(error instanceof Error ? error.message : 'Não foi possível imprimir a encomenda.');
+    }
+  }
   function printCalibration() { setPrintTest(true); setHelpOpen(false); setTimeout(() => { window.print(); setPrintTest(false); },100); }
   function newOrder() { document.querySelector('form')?.reset(); setItems([emptyItem(Date.now())]); setOrderType('Retirada'); setFeedback('Nova ficha pronta.'); }
   const today = new Date().toISOString().slice(0,10);
