@@ -1,0 +1,35 @@
+ARAÚJO ENCOMENDAS — APLICATIVO PARA WINDOWS
+
+OPÇÃO RECOMENDADA: INSTALADOR
+
+1. Abra a pasta electron-final.
+2. Dê dois cliques em "Araújo Encomendas Setup 1.0.0.exe".
+3. Escolha a pasta de instalação e conclua.
+4. O instalador cria atalhos no Menu Iniciar e na Área de Trabalho.
+
+OPÇÃO PORTÁTIL
+
+O arquivo "Araújo Encomendas 1.0.0.exe" abre sem instalação.
+Ele pode ser copiado para outra pasta do mesmo computador.
+
+AVISO DO WINDOWS
+
+Como o aplicativo não possui certificado comercial de assinatura, o Windows
+pode mostrar a mensagem "O Windows protegeu o computador". Nesse caso:
+
+1. Clique em "Mais informações".
+2. Confira se o nome do arquivo é Araújo Encomendas.
+3. Clique em "Executar assim mesmo".
+
+IMPRESSÃO
+
+A Elgin i8 deve estar instalada normalmente no Windows. Ao clicar em imprimir,
+selecione a Elgin i8, papel 80 mm, escala 100%, margens nenhuma e orientação retrato.
+O painel de calibração continua acessível pressionando F1.
+
+ARMAZENAMENTO
+
+As encomendas ficam armazenadas localmente no perfil do aplicativo neste computador.
+Desinstalar e instalar novamente normalmente preserva os dados, mas limpar os dados
+do aplicativo no Windows poderá apagar o histórico.
+

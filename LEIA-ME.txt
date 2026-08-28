@@ -1,0 +1,11 @@
+SISTEMA LOCAL DE ENCOMENDAS
+
+1. Dê dois cliques em "INICIAR SISTEMA.bat".
+2. Não feche a janela preta enquanto estiver usando o sistema.
+3. Preencha a encomenda e clique em "Salvar encomenda".
+4. Clique em "Imprimir em 80 mm".
+5. Na janela de impressão, escolha a Elgin i8 e papel de 80 mm.
+
+As encomendas salvas ficam guardadas somente neste computador e neste navegador.
+O sistema funciona em http://localhost:3000 enquanto a janela de inicialização estiver aberta.
+
