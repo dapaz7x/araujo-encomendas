@@ -40,4 +40,6 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+*.tsbuildinfo
+/package-lock.json
 

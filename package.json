@@ -1,7 +1,7 @@
 {
   "name": "araujo-encomendas",
   "productName": "Araújo Encomendas",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "main": "electron/main.cjs",
   "engines": {
@@ -19,13 +19,19 @@
   "build": {
     "appId": "br.com.araujo.encomendas",
     "productName": "Araújo Encomendas",
-    "electronDist": "node_modules/electron/dist",
     "asar": true,
     "files": [
       "electron/main.cjs",
+      "electron/preload.cjs",
       "desktop-dist/**/*",
       "package.json",
       "!node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "rawPrinter.ps1",
+        "to": "rawPrinter.ps1"
+      }
     ],
     "directories": {
       "output": "electron-final"
