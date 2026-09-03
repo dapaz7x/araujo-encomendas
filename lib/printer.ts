@@ -3,7 +3,16 @@ import type { Item } from './orders';
 declare global {
   interface Window {
     electronAPI?: {
-      printReceipt: (payload: { printerName: string; rawData: string }) => Promise<void>;
+      printReceipt: (payload: { mode: 'windows' | 'network'; printerName?: string; printerIp?: string; printerPort?: number; rawData: string }) => Promise<void>;
+      listPrinters: () => Promise<Array<{ name: string; displayName: string; isDefault: boolean }>>;
+      checkNetworkPrinter: (payload: { printerIp: string; printerPort: number }) => Promise<{ reachable: boolean }>;
+      getNetworkConfig: () => Promise<{ mode:'local'|'host'|'client'; serverIp:string; port:number; localIps:string[] }>;
+      saveNetworkConfig: (payload: { mode:'local'|'host'|'client'; serverIp:string; port:number }) => Promise<{ mode:'local'|'host'|'client'; serverIp:string; port:number; localIps:string[] }>;
+      listOrders: () => Promise<import('./orders').SavedOrder[]>;
+      saveOrder: (order: import('./orders').SavedOrder) => Promise<import('./orders').SavedOrder>;
+      importOrders: (orders: import('./orders').SavedOrder[]) => Promise<import('./orders').SavedOrder[]>;
+      updateOrderStatus: (payload: { id:string; status:import('./orders').OrderStatus }) => Promise<{ ok:boolean }>;
+      deleteOrder: (id:string) => Promise<{ ok:boolean }>;
       openPrintLog: () => Promise<void>;
     };
   }
